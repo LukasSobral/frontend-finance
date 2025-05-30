@@ -1,0 +1,213 @@
+
+
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-top {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.new-transaction {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.transactions-toggle {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.toggle-btn {
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  border: none;
+  background-color: var(--background-card);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-btn.active {
+  background-color: #36A2EB;
+  color: white;
+}
+
+.transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.transaction-card {
+  background-color: var(--background-card);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.transaction-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 400px;
+}
+
+.transaction-description {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+.transaction-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.transaction-value {
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.transaction-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.transaction-card.receita {
+  border-left: 6px solid #36A2EB;
+}
+
+.transaction-card.despesa {
+  border-left: 6px solid #FF6384;
+}
+
+.btn-edit {
+  background-color: #36A2EB;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+  background-color: #2b8ad6;
+}
+
+.btn-delete {
+  background-color: #FF6384;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+  background-color: #e1305c;
+}
+
+
+@media (max-width: 768px) {
+  .filter-top {
+    flex-direction: row;
+  }
+
+  .transaction-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .transaction-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+} 
+
+@media (max-width: 576px) {
+  .transaction-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .transaction-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+@media (max-width: 480px) {
+  .transactions-container {
+    padding: 10px;
+  }
+
+  .transactions-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-form {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .toggle-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .transaction-card-content {
+    max-width: none; 
+  }
+}
+@media (max-width: 360px) {
+  .transactions-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-form {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .toggle-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .transaction-card-content {
+    max-width: none; 
+  }
+}

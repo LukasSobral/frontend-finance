@@ -1,0 +1,105 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: var(--background-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--text-light);
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.sidebar-header img,
+.sidebar-header svg {
+  font-size: 1.3rem;
+}
+
+/* Navegação */
+.nav-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-grow: 1;
+}
+
+.link-custom {
+  color: var(--text-light);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+}
+
+.link-custom:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--secondary-color);
+}
+
+/* Botão Sair */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.btn-custom {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+  background-color: #c43c3c;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    position: relative;
+  }
+
+  .sidebar-header {
+    margin-bottom: 0;
+  }
+
+  .nav-section {
+    flex-direction: row;
+    gap: 10px;
+    margin-left: auto;
+  }
+
+  .sidebar-footer {
+    display: none;
+  }
+}

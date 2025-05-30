@@ -1,0 +1,52 @@
+❓ Possíveis funcionalidades que podem faltar ou melhorar:
+
+🔴 Autenticação:
+ Proteger rotas para impedir acesso sem estar logado (usando PrivateRoute ou Navigate).
+
+ Refresh automático do token (se sua API usar refresh_token).
+
+ Logout global ao expirar token.
+
+🔴 Usuário:
+ Tela de perfil (visualizar e alterar nome, email, senha).
+
+ Avatar ou inicial do nome no header.
+
+ Recuperação de senha (via e-mail).
+
+🔴 Transações:
+ Paginação ou scroll infinito se tiver muitas transações.
+
+ Ordenar por data ou valor.
+
+ Busca por descrição.
+
+ Exportar transações para CSV ou PDF.
+
+🔴 Categorias:
+ Prevenir exclusão de categoria se houver transações atreladas.
+
+ Ícones ou cores diferentes por categoria.
+
+🔴 Dashboard:
+ Gráficos dinâmicos (ex.: Despesas por mês ou Evolução do saldo).
+
+ Mais KPIs: média mensal, gasto por categoria, etc.
+
+ Exportar gráfico como imagem.
+
+🔴 Estilo e UX:
+ Notificações (ex.: toast de sucesso ao criar/editar/excluir).
+
+ Tema dark / light funcionando de fato.
+
+ Feedbacks de carregamento (spinner enquanto busca API).
+
+ Animações suaves nas modais e interações.
+
+ Melhor responsividade em mobile (menu colapsável).
+
+🔴 Testes:
+ Testes unitários de componentes (com Jest e React Testing Library).
+
+ Teste de integração para fluxo de login e CRUD.

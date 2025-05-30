@@ -1,0 +1,31 @@
+.layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
+  background-color: var(--background-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+.inner-content {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+  }
+}
+
+@media (max-width: 767px) {
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+}

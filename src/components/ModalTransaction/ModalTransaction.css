@@ -1,0 +1,212 @@
+/* ✅ CAMADA DE FUNDO */
+.modal-overlay,
+.ReactModal__Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 12000 !important;
+}
+
+/* ✅ CONTEÚDO CENTRALIZADO */
+.modal-content,
+.ReactModal__Content {
+  position: relative;
+  background-color: var(--background-card) !important; /* 👈 força o fundo */
+  padding: 30px;
+  border-radius: var(--border-radius);
+  width: 95%;
+  max-width: 400px !important;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  z-index: 12001;
+  animation: slideDown 0.3s ease-out;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ✅ CABEÇALHO */
+.modal-content h2 {
+  color: var(--text-light);
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+}
+
+/* ✅ BOTÃO DE FECHAR */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.modal-close:hover {
+  transform: scale(1.1);
+}
+
+/* Corrige o visual das opções do <select> */
+.modal-form select option {
+  background-color: var(--background-card);
+  color: var(--text-light);
+}
+
+/* ✅ FORMULÁRIO */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ✅ CAMPOS */
+.modal-form textarea,
+.modal-form input,
+.modal-form select {
+  width: 100%;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, var(--background-dark), #1e2240);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  color: var(--text-light);
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+  transition: border 0.3s ease;
+}
+
+.modal-form textarea:focus,
+.modal-form input:focus,
+.modal-form select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* ✅ BOTÃO DE SALVAR */
+.modal-form .button {
+  background-color: var(--primary-color);
+  padding: 14px 16px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  color: var(--text-light);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+.modal-form .button:hover {
+  background-color: #c43c3c;
+  transform: scale(1.02);
+}
+
+/* ✅ ANIMAÇÃO */
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* ✅ Ajuste geral para telas menores */
+@media (max-width: 576px) {
+  .transactions-container {
+    padding: 20px 10px;
+  }
+
+  .transactions-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .filter-form {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .new-transaction {
+    align-self: flex-end;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .transactions-toggle {
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .transactions-list {
+    gap: 10px;
+  }
+
+  .transaction-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 16px;
+    gap: 10px;
+    font-size: 0.95rem;
+    border-left: 4px solid var(--primary-color);
+  }
+
+  .transaction-card-content {
+    width: 100%;
+    gap: 2px;
+  }
+
+  .transaction-description {
+    font-weight: 600;
+    font-size: 1rem;
+    max-width: 100%;
+    white-space: normal;
+    overflow: visible;
+  }
+
+  .transaction-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .transaction-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .transaction-actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn-edit, .btn-delete {
+    flex: 1;
+    margin: 0 4px;
+    padding: 8px 0;
+    font-size: 0.9rem;
+  }
+}

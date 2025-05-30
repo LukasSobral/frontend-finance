@@ -1,0 +1,61 @@
+.dashboard-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-custom {
+  background-color: var(--background-card);
+  color: var(--text-light);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  transition: transform 0.2s ease;
+  border-left: 5px solid var(--primary-color);
+}
+
+.card-custom:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.card-saldo {
+  border-left: 5px solid #7f5af0;
+}
+
+.card-receitas {
+  border-left: 5px solid #36A2EB;
+}
+
+.card-despesas {
+  border-left: 5px solid #FF6384;
+}
+
+.kpi-value {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.dashboard-title {
+  position: relative;
+  display: inline-block; /* necessário para ajustar o traço */
+  padding-bottom: 5px;
+}
+
+.dashboard-title::after {
+  content: '';
+  display: block;
+  width: 40%;
+  height: 4px;
+  background-color: #4E41F0;
+  margin-top: 5px;
+  border-radius: 2px;
+}
