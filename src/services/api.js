@@ -5,8 +5,12 @@ import axios from "axios";
 //   baseURL: "http://localhost:8000/api",
 // });
 
+// const api = axios.create({
+//   baseURL: "http://192.168.0.117:8000/api",
+// });
+
 const api = axios.create({
-  baseURL: "http://192.168.0.117:8000/api",
+  baseURL: "https://wallet-pzq2.onrender.com/api",
 });
 
 
@@ -22,7 +26,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-//Interceptor de resposta para refresh token automático
+
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -37,9 +41,13 @@ api.interceptors.response.use(
           throw new Error("Sem refresh token.");
         }
 
-       const response = await api.post("/auth/refresh", {
-          refresh_token: refresh_token
-        });     
+      const response = await axios.post(
+        "https://wallet-pzq2.onrender.com/api/auth/refresh",
+        {
+          refresh_token: refresh_token,
+        }
+      );
+   
 
         const { access_token } = response.data;
 
