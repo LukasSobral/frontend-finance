@@ -125,6 +125,22 @@
 }
 
 
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95% !important;
+    padding: 16px !important;
+    max-width: none;
+    border-radius: 16px !important;
+  }
+
+  .modal-form .button {
+    font-size: 1rem;
+    padding: 14px;
+  }
+}
+
+
+
 /* ✅ Ajuste geral para telas menores */
 @media (max-width: 576px) {
   .transactions-container {

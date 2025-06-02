@@ -1,3 +1,8 @@
+html {
+  scroll-behavior: smooth;
+}
+
+
 :root {
   --primary-color: #e94f4f;
   --secondary-color: #ffae00;
@@ -8,6 +13,12 @@
   --text-muted: #b0b0b0;
   --border-radius: 8px;
 }
+
+
+.recharts-wrapper {
+  max-width: 100%;
+}
+
 
 .offcanvas {
   background-color: var(--background-card) !important;
@@ -104,4 +115,30 @@ ul, li {
 
 .section {
   margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  button,
+  input[type="submit"],
+  .btn,
+  input,
+  select,
+  textarea {
+    font-size: 1rem;
+    padding: 14px 18px;
+    border-radius: 12px;
+  }
+
+  h1, h2, h3 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .card-custom {
+    padding: 16px;
+  }
+
+  .container {
+    padding: 10px;
+  }
 }

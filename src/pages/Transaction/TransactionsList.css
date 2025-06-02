@@ -1,5 +1,8 @@
+.transactions-container {
+  padding: 10px;
+}
 
-
+/* FILTROS */
 .filter-form {
   display: flex;
   flex-direction: column;
@@ -33,6 +36,7 @@
   cursor: pointer;
 }
 
+/* TOGGLE TIPO */
 .transactions-toggle {
   margin: 20px 0;
   display: flex;
@@ -55,60 +59,71 @@
   color: white;
 }
 
+/* LISTA DE TRANSAÇÕES */
 .transactions-list {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.transaction-card {
-  background-color: var(--background-card);
-  padding: 15px;
-  border-radius: var(--border-radius);
+/* NOVO LAYOUT EM LINHA */
+.transaction-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  padding: 14px;
+  border-radius: var(--border-radius);
+  background-color: var(--background-card);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #36A2EB;
+  gap: 12px;
 }
 
-.transaction-card-content {
+.transaction-line .left {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  max-width: 400px;
+  gap: 2px;
 }
 
-.transaction-description {
+.transaction-line .description {
   font-weight: bold;
-  white-space: nowrap;
+  font-size: 1rem;
+  max-width: 170px;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 300px;
 }
 
-.transaction-date {
-  font-size: 0.8rem;
+.transaction-line .date {
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
-.transaction-value {
-  font-weight: bold;
-  margin-left: 20px;
-}
-
-.transaction-actions {
+.transaction-line .right {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
 }
 
-.transaction-card.receita {
-  border-left: 6px solid #36A2EB;
+.transaction-line .amount {
+  font-weight: bold;
 }
 
-.transaction-card.despesa {
-  border-left: 6px solid #FF6384;
+.transaction-line .actions {
+  display: flex;
+  gap: 8px;
 }
 
+.transaction-line.receita {
+  border-left-color: #36A2EB;
+}
+
+.transaction-line.despesa {
+  border-left-color: #FF6384;
+}
+
+/* BOTÕES */
 .btn-edit {
   background-color: #36A2EB;
   color: white;
@@ -137,77 +152,102 @@
   background-color: #e1305c;
 }
 
+/* Estilização moderna do bloco de filtro */
+.filter-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-card);
+  padding: 16px;
+  border-radius: var(--border-radius);
+  gap: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  margin-bottom: 20px;
+}
 
-@media (max-width: 768px) {
-  .filter-top {
+.filter-fields {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}
+
+.filter-fields input {
+  width: 100%;
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-round {
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: background-color 0.2s ease;
+}
+
+.btn-round:hover {
+  background-color: #c43c3c;
+}
+
+.btn-apply {
+  flex: 1;
+  margin-left: 12px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.btn-apply:hover {
+  background-color: #c43c3c;
+}
+
+
+/* RESPONSIVO */
+@media (max-width: 576px) {
+  .toggle-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .transaction-line {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .transaction-line .right {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .transaction-line .actions {
+    justify-content: flex-end;
+  }
+
+  .filter-fields {
     flex-direction: row;
   }
 
-  .transaction-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  .filter-actions {
+    flex-direction: row;
   }
 
-  .transaction-actions {
-    width: 100%;
-    justify-content: flex-end;
-  }
-} 
-
-@media (max-width: 576px) {
-  .transaction-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .transaction-actions {
-    width: 100%;
-    justify-content: flex-end;
-  }
-}
-@media (max-width: 480px) {
-  .transactions-container {
-    padding: 10px;
-  }
-
-  .transactions-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .filter-form {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .toggle-btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .transaction-card-content {
-    max-width: none; 
-  }
-}
-@media (max-width: 360px) {
-  .transactions-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .filter-form {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .toggle-btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .transaction-card-content {
-    max-width: none; 
+  .btn-apply {
+    margin-left: 12px;
   }
 }

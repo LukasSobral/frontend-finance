@@ -16,6 +16,15 @@
   width: 100%;
 }
 
+/* Estilo do menu lateral Offcanvas no mobile */
+.custom-offcanvas {
+  width: 80% !important;
+  max-width: 320px;
+  background-color: var(--background-card);
+  color: var(--text-light);
+}
+
+
 @media (min-width: 768px) {
   .main-content {
     margin-left: 250px;

@@ -43,23 +43,21 @@ export default function Layout() {
 
         {/* Offcanvas - só no mobile */}
         <Offcanvas
-          show={showSidebar}
-          onHide={() => setShowSidebar(false)}
-          className="text-light"
-          placement="start"
-          id="offcanvasNavbar"
-          style={{
-            backgroundColor: "var(--background-card)",
-            color: "var(--text-light)"
-          }}
-        >
-          <Offcanvas.Header closeButton closeVariant="white">
-            <Offcanvas.Title className="text-light">Menu</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Sidebar onLogout={handleLogout} />
-          </Offcanvas.Body>
+            show={showSidebar}
+            onHide={() => setShowSidebar(false)}
+            className="custom-offcanvas"
+            placement="start"
+            backdrop={true}
+          >
+            <Offcanvas.Header closeButton closeVariant="white">
+              <Offcanvas.Title className="text-light">Menu</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Sidebar onLogout={handleLogout} onNavigate={() => setShowSidebar(false)} />
+            </Offcanvas.Body>
         </Offcanvas>
+
+
 
         <div className="inner-content">
           {/* Feedback aparece sempre */}
