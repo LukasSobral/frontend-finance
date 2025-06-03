@@ -36,6 +36,7 @@ html, body, #root {
 
 body, html {
   max-width: 100vw;
+  width: 100%;
   overflow-x: hidden;
 }
 
@@ -142,6 +143,19 @@ section {
 /* =====================
    Responsive Adjustments
 ===================== */
+
+@media (max-width: 1024px) {
+  .main-content, .layout, .card-custom {
+    padding: 12px;
+    flex-direction: column;
+  }
+
+  .filter-top {
+    flex-direction: column;
+  }
+}
+
+
 @media (max-width: 768px) {
   button,
   input[type="submit"],
