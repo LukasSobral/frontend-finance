@@ -1,10 +1,18 @@
 .layout {
   display: flex;
+  flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  flex-direction: column;
 }
 
+/* Quando desktop, layout vira row */
+@media (min-width: 768px) {
+  .layout {
+    flex-direction: row;
+  }
+}
+
+/* Conteúdo principal */
 .main-content {
   flex-grow: 1;
   background-color: var(--background-dark);
@@ -15,19 +23,7 @@
   box-sizing: border-box;
 }
 
-.inner-content {
-  width: 100%;
-}
-
-/* Estilo do menu lateral Offcanvas no mobile */
-.custom-offcanvas {
-  width: 80% !important;
-  max-width: 320px;
-  background-color: var(--background-card);
-  color: var(--text-light);
-}
-
-
+/* Desktop: reserva espaço pra sidebar */
 @media (min-width: 768px) {
   .main-content {
     margin-left: 250px;
@@ -35,15 +31,23 @@
   }
 }
 
+/* Mobile: ocupa 100% */
 @media (max-width: 767px) {
   .main-content {
     margin-left: 0;
     width: 100%;
   }
-
-@media (min-width: 768px) {
-  .layout {
-    flex-direction: row;
-  }
 }
+
+.inner-content {
+  width: 100%;
+}
+
+/* Offcanvas (mobile menu) */
+.custom-offcanvas {
+  width: 80% !important;
+  max-width: 320px;
+  background-color: var(--background-card);
+  color: var(--text-light);
+  padding: 16px;
 }

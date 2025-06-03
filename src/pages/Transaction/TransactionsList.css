@@ -216,7 +216,6 @@
 }
 
 
-/* RESPONSIVO */
 @media (max-width: 576px) {
   .toggle-btn {
     width: 100%;
@@ -226,6 +225,14 @@
   .transaction-line {
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .transaction-line .description {
+    font-size: 1rem;
+    max-width: 100%;
+    white-space: normal;
   }
 
   .transaction-line .right {
@@ -235,19 +242,31 @@
     align-items: center;
   }
 
+  .transaction-line .amount {
+    font-size: 1rem;
+  }
+
   .transaction-line .actions {
-    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    padding: 6px 10px;
+    font-size: 0.85rem;
   }
 
   .filter-fields {
-    flex-direction: row;
+    flex-direction: column; /* Mantém seguro até telas um pouco maiores */
   }
 
   .filter-actions {
-    flex-direction: row;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .btn-apply {
-    margin-left: 12px;
+    margin-left: 0;
+    width: 100%;
   }
 }
