@@ -2,6 +2,7 @@
   display: flex;
   width: 100%;
   min-height: 100vh;
+  flex-direction: column;
 }
 
 .main-content {
@@ -9,7 +10,9 @@
   background-color: var(--background-dark);
   min-height: 100vh;
   overflow-x: hidden;
-  padding: 20px;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .inner-content {
@@ -37,4 +40,10 @@
     margin-left: 0;
     width: 100%;
   }
+
+@media (min-width: 768px) {
+  .layout {
+    flex-direction: row;
+  }
+}
 }
