@@ -3,16 +3,28 @@ import { useState, useEffect } from 'react';
 import api from '../../services/api';
 import './ModalTransaction.css';
 
-
 Modal.setAppElement('#root');
 
-export default function ModalTransaction({ isOpen, onClose, onSuccess }) {
+export default function ModalTransaction({ isOpen, onClose, onSuccess, transaction }) {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [type, setType] = useState('DESPESA');
   const [categoryId, setCategoryId] = useState('');
   const [date, setDate] = useState('');
   const [categories, setCategories] = useState([]);
+
+  // 🔁 Preenche os dados se for edição
+  useEffect(() => {
+    if (transaction) {
+      setDescription(transaction.description);
+      setAmount(transaction.amount.toString().replace('.', ',')); // visual mais amigável
+      setType(transaction.type);
+      setCategoryId(transaction.category_id?.toString() || '');
+      setDate(transaction.date ? new Date(transaction.date).toISOString().split('T')[0] : '');
+    } else {
+      resetForm();
+    }
+  }, [transaction]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -28,19 +40,26 @@ export default function ModalTransaction({ isOpen, onClose, onSuccess }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const payload = {
+      description,
+      amount: parseFloat(amount.replace(',', '.')),
+      type,
+      category_id: parseInt(categoryId),
+      date,
+    };
+
     try {
-      await api.post('/transactions', {
-        description,
-        amount: parseFloat(amount),
-        type,
-        category_id: parseInt(categoryId),
-        date
-      });
+      if (transaction) {
+        await api.put(`/transactions/${transaction.id}`, payload);
+      } else {
+        await api.post('/transactions', payload);
+      }
       onSuccess();
       resetForm();
       onClose();
     } catch (error) {
-      console.error('Erro ao criar transação:', error);
+      console.error('Erro ao salvar transação:', error);
     }
   };
 
@@ -54,57 +73,53 @@ export default function ModalTransaction({ isOpen, onClose, onSuccess }) {
 
   return (
     <Modal
-        isOpen={isOpen}
-        onRequestClose={onClose}
-        contentLabel="Nova Transação"
-        className="modal-content"
-        overlayClassName="modal-overlay"
-      >
-        <button className="modal-close" onClick={onClose}>×</button>
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      contentLabel="Nova Transação"
+      className="modal-content"
+      overlayClassName="modal-overlay"
+    >
+      <button className="modal-close" onClick={onClose}>×</button>
+      <h2>{transaction ? 'Editar Transação' : 'Nova Transação'}</h2>
 
-        <h2>Nova Transação</h2>
+      <form onSubmit={handleSubmit} className="modal-form">
+        <textarea
+          placeholder="Descrição"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          rows="3"
+          required
+        />
 
-        <form onSubmit={handleSubmit} className="modal-form">
-          <textarea
-            placeholder="Descrição"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows="3"
-            required
-          />
+        <input
+          type="text"
+          placeholder="Valor (ex: 25,00)"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          required
+        />
 
-          <input
-            type="number"
-            placeholder="Valor"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            required
-          />
+        <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)} required>
+          <option value="">Selecione uma categoria</option>
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>{c.name}</option>
+          ))}
+        </select>
 
-          <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)} required>
-            <option value="">Selecione uma categoria</option>
-            {categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          required
+        />
 
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-          />
+        <select value={type} onChange={(e) => setType(e.target.value)}>
+          <option value="RECEITA">Receita</option>
+          <option value="DESPESA">Despesa</option>
+        </select>
 
-          <select value={type} onChange={(e) => setType(e.target.value)}>
-            <option value="RECEITA">Receita</option>
-            <option value="DESPESA">Despesa</option>
-          </select>
-
-          <button className="button" type="submit">Salvar</button>
-        </form>
+        <button className="button" type="submit">Salvar</button>
+      </form>
     </Modal>
-
   );
 }
