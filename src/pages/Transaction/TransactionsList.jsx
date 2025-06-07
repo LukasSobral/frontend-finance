@@ -16,30 +16,41 @@ export default function TransactionsList() {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [transactionToDelete, setTransactionToDelete] = useState(null);
 
-  const fetchTransactions = async () => {
+  const [limit] = useState(6); // quantas por página
+  const [offset, setOffset] = useState(0); // deslocamento atual
+  const [hasMore, setHasMore] = useState(true); // se ainda há mais transações
+
+  const fetchTransactions = async (reset = false) => {
     try {
-      const response = await api.get("/transactions");
-      setTransactions(response.data);
+      let query = `?limit=${limit}&offset=${reset ? 0 : offset}`;
+      if (startDate) query += `&start_date=${startDate}`;
+      if (endDate) query += `&end_date=${endDate}`;
+
+      const response = await api.get(`/transactions${query}`);
+      const newData = response.data;
+
+      if (reset) {
+        setTransactions(newData);
+        setOffset(limit);
+      } else {
+        setTransactions((prev) => [...prev, ...newData]);
+        setOffset((prev) => prev + limit);
+      }
+
+      setHasMore(newData.length === limit); // se veio menos do que o limite, acabou
     } catch (error) {
       console.error("Erro ao buscar transações:", error);
     }
   };
 
   useEffect(() => {
-    fetchTransactions();
+    fetchTransactions(true);
   }, []);
 
-  const handleFilter = async (e) => {
+  const handleFilter = (e) => {
     e.preventDefault();
-    try {
-      let query = "";
-      if (startDate) query += `start_date=${startDate}&`;
-      if (endDate) query += `end_date=${endDate}`;
-      const response = await api.get(`/transactions?${query}`);
-      setTransactions(response.data);
-    } catch (error) {
-      console.error("Erro ao filtrar:", error);
-    }
+    setOffset(0);
+    fetchTransactions(true);
   };
 
   const filteredTransactions =
@@ -57,10 +68,15 @@ export default function TransactionsList() {
       await api.delete(`/transactions/${transactionToDelete.id}`);
       setIsConfirmOpen(false);
       setTransactionToDelete(null);
-      fetchTransactions();
+      fetchTransactions(true);
     } catch (error) {
       console.error("Erro ao excluir transação:", error);
     }
+  };
+
+  const handleCreateSuccess = () => {
+    fetchTransactions(true); // recarrega tudo do zero
+    setIsModalOpen(false);
   };
 
   return (
@@ -88,8 +104,7 @@ export default function TransactionsList() {
             </button>
           </div>
         </div>
-    </form>
-
+      </form>
 
       {/* Tipos */}
       <div className="transactions-toggle">
@@ -146,11 +161,20 @@ export default function TransactionsList() {
         ))}
       </div>
 
+      {/* Paginação */}
+      {hasMore && (
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <button className="btn-apply" onClick={() => fetchTransactions()}>
+            Carregar mais
+          </button>
+        </div>
+      )}
+
       {/* Modais */}
       <ModalTransaction
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSuccess={fetchTransactions}
+        onSuccess={handleCreateSuccess}
         transaction={editingTransaction}
       />
 

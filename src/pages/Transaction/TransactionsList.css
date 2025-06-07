@@ -215,6 +215,42 @@
   background-color: #c43c3c;
 }
 
+@media (min-width: 768px) {
+  .filter-card {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .filter-fields {
+    flex-direction: row;
+    flex: 1;
+    gap: 12px;
+  }
+
+  .filter-fields input {
+    max-width: 200px;
+  }
+
+  .filter-actions {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .btn-round {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+
+  .btn-apply {
+    margin-left: 0;
+    padding: 10px 20px;
+    width: auto;
+  }
+}
+
+
 
 @media (max-width: 576px) {
   .toggle-btn {

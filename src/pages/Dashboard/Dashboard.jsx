@@ -153,6 +153,32 @@ export default function Dashboard() {
         </Col>
       </Row>
 
+      {/* 🟣 Novo Gráfico - Gastos por Categoria */}
+      {summary.expenses_by_category?.length > 0 && (
+        <div className="card-custom mb-4">
+          <h2>Gastos por Categoria</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={summary.expenses_by_category}
+                dataKey="total"
+                nameKey="category"
+                cx="50%"
+                cy="50%"
+                outerRadius={100}
+                label
+              >
+                {summary.expenses_by_category.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      )}
+
       {/* Gráfico de Linha - Histórico de Gastos */}
       <div className="card-custom mb-4">
         <h2>Histórico de Gastos</h2>
