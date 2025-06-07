@@ -71,6 +71,50 @@
   border-radius: 2px;
 }
 
+
+@media (min-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .dashboard-title {
+    text-align: left;
+  }
+
+  .row.kpi-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+  }
+
+  .kpi-row .card-custom {
+    flex: 1;
+  }
+
+  .filter-form {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  .filter-form .col-md-auto {
+    flex: none;
+  }
+
+  .transaction-item {
+    font-size: 1rem;
+  }
+
+  .card-custom {
+    padding: 20px;
+  }
+
+  .recharts-wrapper {
+    height: auto !important;
+  }
+}
+
+
 /* 🔄 Ajustes específicos para mobile */
 @media (max-width: 768px) {
   .dashboard-container {
