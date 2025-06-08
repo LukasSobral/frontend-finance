@@ -16,9 +16,9 @@ export default function TransactionsList() {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [transactionToDelete, setTransactionToDelete] = useState(null);
 
-  const [limit] = useState(6); // quantas por página
-  const [offset, setOffset] = useState(0); // deslocamento atual
-  const [hasMore, setHasMore] = useState(true); // se ainda há mais transações
+  const [limit] = useState(6);
+  const [offset, setOffset] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
 
   const fetchTransactions = async (reset = false) => {
     try {
@@ -37,7 +37,7 @@ export default function TransactionsList() {
         setOffset((prev) => prev + limit);
       }
 
-      setHasMore(newData.length === limit); // se veio menos do que o limite, acabou
+      setHasMore(newData.length === limit);
     } catch (error) {
       console.error("Erro ao buscar transações:", error);
     }
@@ -75,63 +75,54 @@ export default function TransactionsList() {
   };
 
   const handleCreateSuccess = () => {
-    fetchTransactions(true); // recarrega tudo do zero
+    fetchTransactions(true);
     setIsModalOpen(false);
   };
 
   return (
     <div className="transactions-container">
-      {/* Filtros */}
-      <form onSubmit={handleFilter} className="filter-form">
-        <div className="filter-card">
-          <div className="filter-fields">
-            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-            <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-          </div>
-          <div className="filter-actions">
-            <button
-              type="button"
-              className="btn-round"
-              onClick={() => {
-                setEditingTransaction(null);
-                setIsModalOpen(true);
-              }}
-            >
-              +
-            </button>
-            <button className="btn-apply" type="submit">
-              Filtrar
-            </button>
-          </div>
-        </div>
-      </form>
 
-      {/* Tipos */}
-      <div className="transactions-toggle">
-        <button
-          className={`toggle-btn ${filterType === "DESPESA" ? "active" : ""}`}
-          type="button"
-          onClick={() => setFilterType("DESPESA")}
-        >
-          Despesas
-        </button>
-        <button
-          className={`toggle-btn ${filterType === "RECEITA" ? "active" : ""}`}
-          type="button"
-          onClick={() => setFilterType("RECEITA")}
-        >
-          Receitas
-        </button>
-        <button
-          className={`toggle-btn ${filterType === "TODAS" ? "active" : ""}`}
-          type="button"
-          onClick={() => setFilterType("TODAS")}
-        >
-          Todas
-        </button>
+      {/* FILTRO MODERNO */}
+      <div className="filter-bar">
+        <div className="filter-left">
+          <button
+            type="button"
+            className="btn-apply highlight"
+            onClick={() => {
+              setEditingTransaction(null);
+              setIsModalOpen(true);
+            }}
+          >
+            ➕ Nova Transação
+          </button>
+        </div>
+
+        <form className="filter-right" onSubmit={handleFilter}>
+          <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+          <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+          <button type="submit" className="btn-apply">🔍 Filtrar</button>
+        </form>
       </div>
 
-      {/* Lista */}
+      {/* TOGGLE DE TIPO */}
+      <div className="transactions-toggle">
+        {["DESPESA", "RECEITA", "TODAS"].map((type) => (
+          <button
+            key={type}
+            className={`toggle-btn ${filterType === type ? "active" : ""}`}
+            onClick={() => setFilterType(type)}
+          >
+            {type === "TODAS" ? "Todas" : type === "RECEITA" ? "Receitas" : "Despesas"}
+          </button>
+        ))}
+      </div>
+
+      {/* TOTAL ENCONTRADO */}
+      <div style={{ textAlign: "center", marginBottom: "12px", fontSize: "0.9rem", color: "var(--text-muted)" }}>
+        {filteredTransactions.length} {filterType.toLowerCase()} encontrada(s)
+      </div>
+
+      {/* LISTAGEM */}
       <div className="transactions-list">
         {filteredTransactions.map((t) => (
           <div
@@ -143,7 +134,9 @@ export default function TransactionsList() {
               <div className="date">{new Date(t.date).toLocaleDateString()}</div>
             </div>
             <div className="right">
-              <div className="amount">R$ {t.amount.toFixed(2)}</div>
+              <div className="amount">
+                {t.type === "RECEITA" ? "R$" : "-R$"} {t.amount.toFixed(2)}
+              </div>
               <div className="actions">
                 <button className="btn-edit" onClick={() => handleEdit(t)}>✏️</button>
                 <button
@@ -161,7 +154,7 @@ export default function TransactionsList() {
         ))}
       </div>
 
-      {/* Paginação */}
+      {/* PAGINAÇÃO */}
       {hasMore && (
         <div style={{ marginTop: "20px", textAlign: "center" }}>
           <button className="btn-apply" onClick={() => fetchTransactions()}>
@@ -170,7 +163,7 @@ export default function TransactionsList() {
         </div>
       )}
 
-      {/* Modais */}
+      {/* MODAIS */}
       <ModalTransaction
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

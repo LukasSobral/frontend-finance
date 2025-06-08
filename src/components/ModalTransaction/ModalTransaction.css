@@ -112,6 +112,17 @@
   transform: scale(1.02);
 }
 
+.modal-error {
+  background-color: rgba(255, 0, 0, 0.15);
+  border-left: 4px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 10px;
+  font-size: 0.9rem;
+  border-radius: var(--border-radius);
+}
+
+
+
 /* ✅ ANIMAÇÃO */
 @keyframes slideDown {
   from {

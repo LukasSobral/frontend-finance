@@ -13,11 +13,14 @@ export default function ModalTransaction({ isOpen, onClose, onSuccess, transacti
   const [date, setDate] = useState('');
   const [categories, setCategories] = useState([]);
 
-  // 🔁 Preenche os dados se for edição
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // Preenche dados no modo edição
   useEffect(() => {
     if (transaction) {
       setDescription(transaction.description);
-      setAmount(transaction.amount.toString().replace('.', ',')); // visual mais amigável
+      setAmount(transaction.amount.toString().replace('.', ','));
       setType(transaction.type);
       setCategoryId(transaction.category_id?.toString() || '');
       setDate(transaction.date ? new Date(transaction.date).toISOString().split('T')[0] : '');
@@ -40,6 +43,8 @@ export default function ModalTransaction({ isOpen, onClose, onSuccess, transacti
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setErrorMessage('');
 
     const payload = {
       description,
@@ -55,11 +60,15 @@ export default function ModalTransaction({ isOpen, onClose, onSuccess, transacti
       } else {
         await api.post('/transactions', payload);
       }
+
       onSuccess();
       resetForm();
       onClose();
     } catch (error) {
       console.error('Erro ao salvar transação:', error);
+      setErrorMessage("Não foi possível salvar a transação. Verifique os dados e tente novamente.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -69,6 +78,7 @@ export default function ModalTransaction({ isOpen, onClose, onSuccess, transacti
     setType('DESPESA');
     setCategoryId('');
     setDate('');
+    setErrorMessage('');
   };
 
   return (
@@ -89,6 +99,7 @@ export default function ModalTransaction({ isOpen, onClose, onSuccess, transacti
           onChange={(e) => setDescription(e.target.value)}
           rows="3"
           required
+          autoFocus
         />
 
         <input
@@ -118,7 +129,11 @@ export default function ModalTransaction({ isOpen, onClose, onSuccess, transacti
           <option value="DESPESA">Despesa</option>
         </select>
 
-        <button className="button" type="submit">Salvar</button>
+        {errorMessage && <div className="modal-error">{errorMessage}</div>}
+
+        <button className="button" type="submit" disabled={isLoading}>
+          {isLoading ? "Salvando..." : "Salvar"}
+        </button>
       </form>
     </Modal>
   );

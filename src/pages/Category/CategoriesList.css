@@ -98,6 +98,49 @@
 .btn-excluir:hover {
   background-color: #c43c3c;
 }
+
+.category-icon {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.category-card {
+  gap: 16px;
+  border-left: 5px solid var(--primary-color);
+}
+
+.category-info {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .category-card {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .category-info {
+    flex: 1;
+  }
+
+  .category-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+}
+
 @media (max-width: 768px) {
   .categories-container {
     padding: 16px;

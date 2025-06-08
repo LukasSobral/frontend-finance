@@ -19,14 +19,14 @@ export default function Layout() {
 
   return (
     <div className="layout">
-      {/* Sidebar fixa - apenas no desktop */}
+      {/* Sidebar fixa - desktop */}
       <aside className="sidebar d-none d-md-flex flex-column">
         <h5 className="text-light">💰 Minha Carteira</h5>
         <Sidebar onLogout={handleLogout} />
       </aside>
 
       <div className="main-content">
-        {/* Navbar - só no mobile */}
+        {/* Navbar (topo) - mobile */}
         <Navbar className="bg-card-custom d-flex d-md-none justify-content-between align-items-center px-3">
           <div>
             <Navbar.Brand className="text-light mb-0">💰 Minha Carteira</Navbar.Brand>
@@ -41,35 +41,36 @@ export default function Layout() {
           </Navbar.Toggle>
         </Navbar>
 
-        {/* Offcanvas - só no mobile */}
+        {/* Menu lateral offcanvas - mobile */}
         <Offcanvas
-            show={showSidebar}
-            onHide={() => setShowSidebar(false)}
-            className="custom-offcanvas"
-            placement="start"
-            backdrop={true}
-          >
-            <Offcanvas.Header closeButton closeVariant="white">
-              <Offcanvas.Title className="text-light">Menu</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-              <Sidebar onLogout={handleLogout} onNavigate={() => setShowSidebar(false)} />
-            </Offcanvas.Body>
+          show={showSidebar}
+          onHide={() => setShowSidebar(false)}
+          className="custom-offcanvas"
+          placement="start"
+          backdrop
+        >
+          <Offcanvas.Header closeButton closeVariant="white">
+            <Offcanvas.Title className="text-light">Menu</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <Sidebar onLogout={handleLogout} onNavigate={() => setShowSidebar(false)} />
+          </Offcanvas.Body>
         </Offcanvas>
 
-
-
         <div className="inner-content">
-          {/* Feedback aparece sempre */}
-          {feedback && (
-            <div className="alert alert-success text-center">{feedback}</div>
-          )}
-
-          {/* Header só no desktop */}
-          <div className="d-none d-md-block">
+          {/* Header - desktop e tablet */}
+          <div className="d-none d-sm-block">
             <Header user={user} />
           </div>
 
+          {/* Feedback */}
+          {feedback && (
+            <div className="alert alert-success text-center mb-3 feedback-alert">
+              {feedback}
+            </div>
+          )}
+
+          {/* Conteúdo principal */}
           <div className="container py-3">
             <Outlet />
           </div>

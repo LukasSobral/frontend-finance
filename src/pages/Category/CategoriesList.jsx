@@ -46,29 +46,35 @@ export default function CategoriesList() {
       <div className="categories-header">
         <h1>Categorias</h1>
         <button
-          className="button"
+          className="button highlight"
           onClick={() => {
             setEditingCategory(null);
             setIsModalOpen(true);
           }}
         >
-          Nova Categoria
+          ➕ Nova Categoria
         </button>
       </div>
 
       <div className="categories-list">
         {categories.map((c) => (
           <div key={c.id} className="category-card">
-            <div>
+            <div className="category-icon">{c.name.charAt(0).toUpperCase()}</div>
+
+            <div className="category-info">
               <strong>{c.name}</strong>
-              <small>{c.description}</small>
+              {c.description && <small>{c.description}</small>}
             </div>
+
             <div className="category-actions">
               <button className="btn-editar" onClick={() => handleEdit(c)}>Editar</button>
-              <button className="btn-excluir" onClick={() => {
-                setCategoryToDelete(c);
-                setIsConfirmOpen(true);
-              }}>
+              <button
+                className="btn-excluir"
+                onClick={() => {
+                  setCategoryToDelete(c);
+                  setIsConfirmOpen(true);
+                }}
+              >
                 Excluir
               </button>
             </div>

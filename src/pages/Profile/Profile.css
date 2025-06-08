@@ -21,3 +21,62 @@
   background-color: var(--background-card);
   color: var(--text-light);
 }
+
+.button {
+  background-color: var(--primary-color);
+  padding: 12px;
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #c43c3c;
+}
+
+.profile-alert {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: rgba(40, 167, 69, 0.1);
+  border: 1px solid #28a745;
+  color: #28a745;
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.admin-section {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--text-light);
+}
+
+.admin-section p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.button-admin {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-admin:hover {
+  background-color: #218838;
+}

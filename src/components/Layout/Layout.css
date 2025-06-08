@@ -5,13 +5,6 @@
   min-height: 100vh;
 }
 
-/* Quando desktop, layout vira row */
-@media (min-width: 768px) {
-  .layout {
-    flex-direction: row;
-  }
-}
-
 /* Conteúdo principal */
 .main-content {
   flex-grow: 1;
@@ -22,6 +15,43 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+.feedback-alert {
+  background-color: rgba(40, 167, 69, 0.1);
+  border: 1px solid #28a745;
+  color: #28a745;
+  border-radius: var(--border-radius);
+  padding: 12px;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease;
+}
+
+
+/* Quando desktop, layout vira row */
+@media (min-width: 768px) {
+  .layout {
+    flex-direction: row;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 576px) {
+  .feedback-alert {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+
 
 /* Desktop: reserva espaço pra sidebar */
 @media (min-width: 768px) {

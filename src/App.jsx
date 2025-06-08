@@ -6,6 +6,7 @@ import CategoriesList from "./pages/Category/CategoriesList";
 import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Profile from "./pages/Profile/Profile";
+import UserManagementPanel from "./components/UserManagementPanel/UserManagementPanel";
 import "../styles/global.css";
 
 function App() {
@@ -14,17 +15,18 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         
-        {/* Protegidas */}
         <Route path="/" element={<PrivateRoute />}>
           <Route element={<Layout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="transactions" element={<TransactionsList />} />
             <Route path="categories" element={<CategoriesList />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="admin/users" element={<UserManagementPanel />} /> {/* <- CORRETO AGORA */}
           </Route>
         </Route>
       </Routes>
     </BrowserRouter>
+
   );
 }
 

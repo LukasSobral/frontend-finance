@@ -41,18 +41,28 @@
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
+  gap: 12px;
+  padding: 10px 14px;
   border-radius: var(--border-radius);
   transition: all 0.3s ease;
+  font-size: 0.95rem;
+  text-decoration: none;
 }
 
 .link-custom:hover {
   background-color: rgba(255, 255, 255, 0.06);
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
-/* Botão Sair */
+.link-custom.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--primary-color);
+  color: var(--primary-color);
+  font-weight: 600;
+  padding-left: 12px;
+}
+
+/* Botão Sair (desktop) */
 .sidebar-footer {
   margin-top: auto;
   padding-top: 20px;
@@ -77,6 +87,7 @@
   background-color: #c43c3c;
 }
 
+/* Botão Sair (mobile) */
 .btn-logout-mobile {
   color: var(--text-light);
   font-weight: 500;
@@ -93,12 +104,8 @@
 }
 
 .btn-logout-mobile:hover {
-  background-color: rgba(255, 128, 128, 0.1);
-  color: var(--secondary-color);
-}
-
-.nav-section .btn-logout-mobile:hover {
   background-color: rgba(255, 255, 255, 0.06);
+  color: var(--primary-color);
 }
 
 /* Responsivo */

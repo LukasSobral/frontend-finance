@@ -64,3 +64,14 @@
 .register-link a:hover {
   color: var(--primary-color);
 }
+
+.error-message {
+  color: #ff4d4d;
+  background-color: #330000;
+  border: 1px solid #ff4d4d;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+

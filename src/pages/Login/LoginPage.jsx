@@ -7,11 +7,17 @@ import { useAuth } from "../../context/AuthContext";
 export default function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth(); 
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setErrorMessage("");
+
     try {
       const formData = new FormData();
       formData.append("username", email);
@@ -21,19 +27,23 @@ export default function LoginPage() {
         headers: { "Content-Type": "multipart/form-data" }
       });
 
-      localStorage.setItem("access_token", response.data.access_token);
+      const token = response.data.access_token;
+      localStorage.setItem("access_token", token);
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      const userData = {
-        name: email.split('@')[0],
-        email: email
-      };
-
-      login(userData);
+      // 🔥 Buscar dados reais do usuário
+      const me = await api.get("/auth/me");
+      login(me.data); // agora terá name, email, is_admin, etc.
 
       navigate("/dashboard");
     } catch (error) {
-      console.error(error);
-      alert("Erro ao fazer login");
+      if (error.response?.status === 401) {
+        setErrorMessage("E-mail ou senha inválidos.");
+      } else {
+        setErrorMessage("Erro ao fazer login. Tente novamente mais tarde.");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -42,6 +52,7 @@ export default function LoginPage() {
       <div className="login-card">
         <div className="logo">💰 Minha Carteira</div>
         <h2>Entrar</h2>
+
         <form onSubmit={handleLogin}>
           <input
             type="email"
@@ -49,6 +60,8 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoComplete="email"
+            disabled={loading}
           />
 
           <input
@@ -57,9 +70,15 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="current-password"
+            disabled={loading}
           />
 
-          <button className="button" type="submit">Acessar</button>
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
+
+          <button className="button" type="submit" disabled={loading}>
+            {loading ? "Entrando..." : "Acessar"}
+          </button>
         </form>
 
         <div className="register-link">

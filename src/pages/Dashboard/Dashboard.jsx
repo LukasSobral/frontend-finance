@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, LineChart, Line, CartesianGrid } from 'recharts';
+import {
+  PieChart, Pie, Cell,
+  BarChart, Bar, XAxis, YAxis, Tooltip, Legend,
+  ResponsiveContainer, LineChart, Line, CartesianGrid
+} from 'recharts';
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import './Dashboard.css';
+
 const COLORS = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'];
 
 export default function Dashboard() {
@@ -64,42 +69,26 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="dashboard-container text-light">
-      <h1 className="mb-4 dashboard-title">Dashboard</h1>
+    <div className="dashboard-wrapper text-light">
 
-      <Form className="row g-2 mb-4" onSubmit={handleFilter}>
-        <div className="col-12 col-md-auto">
+      {/* Título e Filtro */}
+      <div className="dashboard-header mb-4">
+        <h1 className="dashboard-title">Dashboard</h1>
+        <Form className="filter-form d-flex flex-wrap gap-2" onSubmit={handleFilter}>
           <Form.Control type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-        </div>
-        <div className="col-12 col-md-auto">
           <Form.Control type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-        </div>
-        <div className="col-12 col-md-auto">
-          <Button type="submit" className="btn-custom w-100">Filtrar</Button>
-        </div>
-      </Form>
+          <Button type="submit" className="btn-custom">Filtrar</Button>
+        </Form>
+      </div>
 
+      {/* KPIs */}
       <Row className="g-3 mb-4">
-        <Col xs={12} md={4}>
-          <div className="card-custom card-saldo">
-            <h2>Saldo Atual</h2>
-            <p className="kpi-value">R$ {summary.balance.toFixed(2)}</p>
-          </div>
-        </Col>
-        <Col xs={12} md={4}>
-          <div className="card-custom card-receitas">
-            <h2>Receitas</h2>
-            <p className="kpi-value">R$ {summary.total_income.toFixed(2)}</p>
-          </div>
-        </Col>
-        <Col xs={12} md={4}>
-          <div className="card-custom card-despesas">
-            <h2>Despesas</h2>
-            <p className="kpi-value">R$ {summary.total_expense.toFixed(2)}</p>
-          </div>
-        </Col>
+        <Col md={4}><div className="card-custom card-saldo"><h2>Saldo Atual</h2><p className="kpi-value">R$ {summary.balance.toFixed(2)}</p></div></Col>
+        <Col md={4}><div className="card-custom card-receitas"><h2>Receitas</h2><p className="kpi-value">R$ {summary.total_income.toFixed(2)}</p></div></Col>
+        <Col md={4}><div className="card-custom card-despesas"><h2>Despesas</h2><p className="kpi-value">R$ {summary.total_expense.toFixed(2)}</p></div></Col>
       </Row>
 
+      {/* Últimas Transações */}
       <div className="card-custom mb-4">
         <h2>Últimas Transações</h2>
         {transactions.map((t) => (
@@ -110,8 +99,9 @@ export default function Dashboard() {
         ))}
       </div>
 
+      {/* Gráficos principais */}
       <Row className="g-3 mb-4">
-        <Col xs={12} md={6}>
+        <Col md={6}>
           <div className="card-custom">
             <h2>Relação</h2>
             <ResponsiveContainer width="100%" height={250}>
@@ -137,7 +127,7 @@ export default function Dashboard() {
           </div>
         </Col>
 
-        <Col xs={12} md={6}>
+        <Col md={6}>
           <div className="card-custom">
             <h2>Resumo Financeiro</h2>
             <ResponsiveContainer width="100%" height={250}>
@@ -153,7 +143,7 @@ export default function Dashboard() {
         </Col>
       </Row>
 
-      {/* 🟣 Novo Gráfico - Gastos por Categoria */}
+      {/* Gastos por categoria */}
       {summary.expenses_by_category?.length > 0 && (
         <div className="card-custom mb-4">
           <h2>Gastos por Categoria</h2>
@@ -179,7 +169,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Gráfico de Linha - Histórico de Gastos */}
+      {/* Histórico de Gastos */}
       <div className="card-custom mb-4">
         <h2>Histórico de Gastos</h2>
         <ResponsiveContainer width="100%" height={300}>

@@ -1,0 +1,95 @@
+.users-container {
+  margin-top: 30px;
+}
+
+.users-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.users-header h2 {
+  font-size: 1.4rem;
+  color: var(--text-light);
+}
+
+.users-header .button {
+  background-color: var(--primary-color);
+  padding: 10px 18px;
+  border: none;
+  border-radius: var(--border-radius);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.user-card {
+  background-color: var(--background-card);
+  padding: 16px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-card strong {
+  color: var(--text-light);
+  font-size: 1.1rem;
+}
+
+.user-card small {
+  color: var(--text-muted);
+  display: block;
+  margin-top: 4px;
+}
+
+.user-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-editar {
+  background-color: #36A2EB;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-excluir {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-status {
+  border: none;
+  padding: 8px 14px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-status.ativo {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-status.inativo {
+  background-color: #6c757d;
+  color: white;
+}
