@@ -132,7 +132,13 @@ export default function TransactionsList() {
             <div className="left">
               <div className="description">{t.description}</div>
               <div className="date">{new Date(t.date).toLocaleDateString()}</div>
+              {t.user && (
+                <div className="author" style={{ fontSize: "0.8rem", color: "#888" }}>
+                  Criado por {t.user.name.split(" ")[0]}
+                </div>
+              )}
             </div>
+
             <div className="right">
               <div className="amount">
                 {t.type === "RECEITA" ? "R$" : "-R$"} {t.amount.toFixed(2)}
