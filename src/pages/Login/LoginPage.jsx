@@ -31,9 +31,9 @@ export default function LoginPage() {
       localStorage.setItem("access_token", token);
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      // 🔥 Buscar dados reais do usuário
+
       const me = await api.get("/auth/me");
-      login(me.data); // agora terá name, email, is_admin, etc.
+      login(me.data); 
 
       navigate("/dashboard");
     } catch (error) {

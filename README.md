@@ -1,12 +1,52 @@
-# React + Vite
+# 💸 Sistema Financeiro - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend do sistema financeiro pessoal desenvolvido com **React**, voltado para controle de receitas, despesas, saldo e relatórios. Totalmente responsivo, com suporte a **PWA (Progressive Web App)** para uso em dispositivos móveis Android e iOS.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🖼️ Imagens do Sistema
 
-## Expanding the ESLint configuration
+> Coloque suas imagens na pasta `/public/images/` e atualize os caminhos abaixo:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🔐 Tela de Login
+
+![Login](./public/images/login.png)
+
+### 📊 Dashboard Principal
+
+![Dashboard](./public/images/dashboard.png)
+
+### 💰 Lista de Transações
+
+![Transações](./public/images/transacoes.png)
+
+### 💰 Nova Transação
+
+![Transações](./public/images/nova_transacao.png)
+
+
+### 💰 Lista de Categorias
+
+![Transações](./public/images/categoria.png)
+
+### 💰 Nova Transação
+
+![Transações](./public/images/nova_categoria.png)
+
+
+---
+
+## 🚀 Instalação e Execução
+
+```bash
+# Clonar o repositório
+git clone https://github.com/seuusuario/seu-repo-front.git
+
+# Entrar na pasta
+cd seu-repo-front
+
+# Instalar as dependências
+npm install
+
+# Iniciar o servidor de desenvolvimento
+npm run dev
