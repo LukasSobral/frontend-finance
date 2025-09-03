@@ -27,11 +27,11 @@ Frontend do sistema financeiro pessoal desenvolvido com **React**, voltado para 
 
 ### 💰 Lista de Categorias
 
-![Transações](./public/images/categoria.png)
+![Categoria](./public/images/categoria.png)
 
-### 💰 Nova Transação
+### 💰 Nova Categoria
 
-![Transações](./public/images/nova_categoria.png)
+![Categoria](./public/images/nova_categoria.png)
 
 
 ---
@@ -40,13 +40,10 @@ Frontend do sistema financeiro pessoal desenvolvido com **React**, voltado para 
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/seuusuario/seu-repo-front.git
+git clone git@github.com:LukasSobral/frontend-finance.git
 
-# Entrar na pasta
-cd seu-repo-front
+cd frontend-finance
 
-# Instalar as dependências
 npm install
 
-# Iniciar o servidor de desenvolvimento
 npm run dev
